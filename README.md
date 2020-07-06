@@ -54,6 +54,8 @@ password|integer|null: false
 |image|string|
 |content|text|
 |created_at|t.timestamps|null: false|
+|user_id|integer|null: false, foreign_key: true|
+|group_id|integer|null: false, foreign_key: true|
 
 ### Association
 
