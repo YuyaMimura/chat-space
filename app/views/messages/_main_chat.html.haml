@@ -1,26 +1,21 @@
 .Chat-main
   .Chat-main__group-info
     .Header-left
-      .Header-left__name test
-      .Header-left__lists Member:masa
-    = link_to "#", class: "Header-edit" do
+      .Header-left__name
+        = @group.name
+      .Header-left__lists
+        Member : 
+        - @group.users.each do |user|
+          = user.name
+    = link_to edit_group_path(@group), class: "Header-edit" do
       Edit
   .Chat-main__message-list
-    .Message-info
-      .Message-info__top
-        .Message-info__name masa
-        .Message-info__time 2019/11/20(Wed) 17:43:01
-      .Message-info__content おはよう！
-    .Message-info
-      .Message-info__top
-        .Message-info__name masa
-        .Message-info__time 2019/11/20(Wed) 17:43:01
-      .Message-info__content おはよう！
+    = render @messages
   .Chat-main__message-form
-    %form.Form
+    = form_with model: [@group, @message], html: {class: "Form"}, local: true do |f|
       .Form__contents
-        %input{type: "text", class: "Form__text", placeholder: "type a message"}
-        %label{class: "Form__image"}
+        = f.text_field :content, class: "Form__text", placeholder: "type a message"
+        = f.label :image, class: "Form__image" do
           = icon('fas', 'image')
-          %input{type: "file", class: "Form__image-file"}
-      %input{type: "submit", class: "submit-btn", value: "Send"}
+          = f.file_field :image, class: "Form__image-file"
+      = f.submit "Send", class: "submit-btn"
