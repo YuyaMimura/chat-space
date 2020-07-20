@@ -1,3 +1,3 @@
 //= require jquery
-// = require_tree .
+//= require rails-ujs
 //= require_tree ./modules
